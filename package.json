@@ -5,9 +5,12 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "predev": "npm run swagger",
+    "prebuild": "npm run swagger",
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
+    "dev": "DEBUG=express:* nodemon src/index.ts",
+    "swagger": "ts-node src/swagger.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "db:migrate": "npm run typeorm migration:run -- -d data-source.ts",
     "db:rollback": "npm run typeorm migration:revert -- -d data-source.ts",
@@ -22,11 +25,14 @@
     "express": "^4.18.2",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.1",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.0",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.16",
+    "@types/swagger-ui-express": "^4.1.6",
     "cz-conventional-changelog": "^3.3.0",
     "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",

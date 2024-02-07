@@ -13,3 +13,47 @@ routes.get(
         }
     }
 );
+
+routes.post('/',
+    async (req: Request, res: Response) => {
+        try {
+            const response = 'successful user api';
+            res.status(200).json(response);
+        } catch (error: any) {
+            res.status(error.statusCode).json({ error: error.description });
+        }
+    }
+);
+
+routes.put('/',
+    async (req: Request, res: Response) => {
+        try {
+            const response = 'successful user api';
+            res.status(200).json(response);
+        } catch (error: any) {
+            res.status(error.statusCode).json({ error: error.description });
+        }
+    }
+);
+
+routes.delete('/',
+    async (req: Request, res: Response) => {
+        try {
+            const response = 'successful user api';
+            res.status(200).json(response);
+        } catch (error: any) {
+            res.status(error.statusCode).json({ error: error.description });
+        }
+    }
+);
+
+routes.post('/registration',
+    async (req: Request, res: Response) => {
+        try {
+            const response = 'successful user api';
+            res.status(200).json(response);
+        } catch (error: any) {
+            res.status(error.statusCode).json({ error: error.description });
+        }
+    }
+);
