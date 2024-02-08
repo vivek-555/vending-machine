@@ -16,8 +16,8 @@ export const AppDataSource = new DataSource({
   password: DB_PASSWORD,
   database: DB_DATABASE,
   ssl: false,
-  synchronize: NODE_ENV === "dev" ? false : false,
-//logging logs sql command on the treminal
+  // synchronize: NODE_ENV === "dev" ? false : false,
+  // logs sql command on the terminal
   logging: NODE_ENV === "dev" ? false : false,
   entities: [
     path.join(__dirname, './src/*/entity.ts')

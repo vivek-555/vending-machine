@@ -17,7 +17,7 @@ export class User extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type: String, nullable: false })
+    @Column({ type: String, nullable: false, unique: true })
     username: string;
 
     @Column({ type: String, nullable: false })
@@ -28,4 +28,7 @@ export class User extends BaseEntity {
 
     @Column({ type: 'enum', enum: Roles, nullable: false })
     role: Roles;
+
+    @Column({ default: false, nullable: false })
+    deleted: boolean;
 }

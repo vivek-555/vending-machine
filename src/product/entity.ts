@@ -25,4 +25,7 @@ export class Product extends BaseEntity {
         eager: true
     })
     sellerId: User;
+
+    @Column({ default: false, nullable: false })
+    deleted: boolean;
 }

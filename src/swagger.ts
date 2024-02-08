@@ -9,7 +9,7 @@ const doc = {
     },
     servers: [
         {
-            url: 'http://localhost:3000/docs',
+            url: 'http://localhost:3000/api',
             description: ''
         },
     ],
