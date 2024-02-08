@@ -80,3 +80,20 @@ routes.post('/registration',
         }
     }
 );
+
+routes.post('/deposit',
+    async (req: Request, res: Response) => {
+        try {
+            const { username, deposit } = req.body;
+            const userService = new UserService();
+            await userService.updateUser(username, deposit);
+            res.status(201).json({ result: 'successful' });
+        } catch (error: any) {
+            if (error instanceof ValidationError) {
+                res.status(409).json({ error: error.message });
+            } else {
+                res.status(500).json({ error: error.description });
+            }
+        }
+    }
+);

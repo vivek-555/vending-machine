@@ -94,7 +94,7 @@ export class UserService {
             newRole = role as Roles;
         }
 
-        const updatedUser = await userRepository.save({ ...userFound, username, deposit, role: newRole, deleted: deleteUser });
+        const updatedUser = await userRepository.save({ ...userFound, deposit, role: newRole, deleted: deleteUser });
         return updatedUser;
     }
 
