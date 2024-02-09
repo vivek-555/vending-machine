@@ -3,7 +3,7 @@ import { DENOMINATIONS } from "./constants";
 export const isNumber = (possibleNumber: string) => !isNaN(Number(possibleNumber));
 
 export const getChange = (balanceLeft: number): number[] => {
-    const denominations = DENOMINATIONS;
+    const denominations = [...DENOMINATIONS];   // create deep copy
     const changeDenominations: number[] = [];
 
     const determineChange = (balanceLeft: number, denominationArray: number[]) => {
