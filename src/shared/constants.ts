@@ -1,0 +1,1 @@
+export const DENOMINATIONS: number[] = [5, 10, 20, 50, 100];  // no need to have this in config 
