@@ -52,4 +52,15 @@ export class ProductService {
         }
         return productFound;
     }
+
+    /**
+    * returns all products without pagination(for now)
+    * @returns Product entities in array
+    */
+    async getProducts() {
+        const productRepository = Product.getRepository();
+
+        const productsFound = await productRepository.find();
+        return productsFound;
+    }
 }

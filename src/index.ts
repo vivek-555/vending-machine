@@ -6,6 +6,7 @@ import routes from "./routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerOutput from "./swagger_output.json";
 import { AppDataSource } from '../data-source';
+const { unless } = require("express-unless");
 const { auth } = require('express-oauth2-jwt-bearer');
 
 dotenv.config();
@@ -19,8 +20,12 @@ const jwtCheck = auth({
   tokenSigningAlg: 'RS256'
 });
 
-// enforce on all endpoints except '/api/user/registration'
-app.use(/^(?!\/api\/user\/registration$|\/docs\/).*$/, jwtCheck);
+// enforce auth on all endpoints except '/api/user/registration', '/docs/', '/api/product/:productId/buy', '/api/product'
+const publicPaths = [/^\/api\/user\/registration\/?$/, /^\/docs\/?$/, /^\/api\/product\/[^\/]+\/buy\/?$/, /^\/api\/product\/?$/];
+
+
+jwtCheck.unless = unless;
+app.use(jwtCheck.unless({ path: publicPaths }));
 
 app.use(express.json());    // to process only json requests
 
@@ -35,4 +40,4 @@ AppDataSource.initialize()
 
 app.listen(port, () => {
   console.log(`Sample app listening on port ${port} at http://localhost:${port}/`)
-})
+});
