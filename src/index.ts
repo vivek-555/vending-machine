@@ -6,26 +6,15 @@ import routes from "./routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerOutput from "./swagger_output.json";
 import { AppDataSource } from '../data-source';
-const { unless } = require("express-unless");
-const { auth } = require('express-oauth2-jwt-bearer');
-
 dotenv.config();
+import { checkJwt } from './shared/auth0';
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
-const jwtCheck = auth({
-  audience: 'http://vending-machine-sample.com',
-  issuerBaseURL: 'https://dev-2xmuto8hk6gefwt3.us.auth0.com/',
-  tokenSigningAlg: 'RS256'
-});
-
 // enforce auth on all endpoints except '/api/user/registration', '/docs/', '/api/product/:productId/buy', '/api/product'
-const publicPaths = [/^\/api\/user\/registration\/?$/, /^\/docs\/?$/, /^\/api\/product\/[^\/]+\/buy\/?$/, /^\/api\/product\/?$/];
-
-
-jwtCheck.unless = unless;
-app.use(jwtCheck.unless({ path: publicPaths }));
+const publicPaths = [/^\/api\/user\/registration\/?$/, /^\/docs\/?.*$/, /^\/api\/product\/[^\/]+\/buy\/?$/, /^\/api\/product\/?$/];
+app.use(checkJwt.unless({ path: publicPaths }));
 
 app.use(express.json());    // to process only json requests
 
