@@ -21,10 +21,11 @@ const doc = {
                 bearerFormat: "JWT",
             }
         }
-    }
+    },
+    security: [{ bearerAuth: [] }],
 };
 
 const outputFile = './swagger_output.json';
 const routes = ['./src/routes.ts'];
 
-swaggerAutogen({openapi: '3.0.0'})(outputFile, routes, doc);
+swaggerAutogen({ openapi: '3.0.0' })(outputFile, routes, doc);
