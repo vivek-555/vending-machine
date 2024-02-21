@@ -1,7 +1,7 @@
 import { DENOMINATIONS } from "../shared/constants";
 import { ValidationError } from "../shared/custom-errors";
 import { Encrypt } from "../shared/encrypt";
-import { Roles, User } from "./entity";
+import { Roles, User } from "./entities/user";
 
 export class UserService {
     /**

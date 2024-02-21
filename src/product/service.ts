@@ -63,4 +63,11 @@ export class ProductService {
         const productsFound = await productRepository.find();
         return productsFound;
     }
+
+    async createProduct(name: string, cost: number, quantityAvailable: number, sellerEmail: string) {
+        const productRepository = Product.getRepository();
+
+        const productsFound = await productRepository.find();
+        return productsFound;
+    }
 }

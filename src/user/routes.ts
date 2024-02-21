@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { UserService } from './service';
 import { ValidationError } from '../shared/custom-errors';
+import { createAuth0User, getManagementAPIToken } from '../shared/auth0';
 
 export const routes = express.Router();
 
@@ -68,9 +69,25 @@ routes.post('/registration',
     async (req: Request, res: Response) => {
         try {
             const { username, password } = req.body;
+            await createAuth0User(username, password);
+
             const userService = new UserService();
             await userService.registerUser(username, password);
             res.status(201).json({ result: 'successful' });
+        } catch (error: any) {
+            if (error instanceof ValidationError) {
+                res.status(409).json({ error: error.message });
+            } else {
+                res.status(500).json({ error: error.description });
+            }
+        }
+    }
+);
+
+routes.post('/reset',
+    async (req: Request, res: Response) => {
+        try {
+            //TODO: reset connection
         } catch (error: any) {
             if (error instanceof ValidationError) {
                 res.status(409).json({ error: error.message });

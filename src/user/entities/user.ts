@@ -2,7 +2,9 @@ import {
     BaseEntity,
     Entity,
     PrimaryGeneratedColumn,
-    Column
+    Column,
+    CreateDateColumn,
+    UpdateDateColumn
 } from "typeorm";
 
 export enum Roles {
@@ -31,4 +33,10 @@ export class User extends BaseEntity {
 
     @Column({ default: false, nullable: false })
     deleted: boolean;
+
+    @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+    public created_at: Date;
+
+    @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+    public updated_at: Date;
 }

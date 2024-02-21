@@ -20,7 +20,8 @@ export const AppDataSource = new DataSource({
   // logs sql command on the terminal
   logging: NODE_ENV === "dev" ? false : false,
   entities: [
-    path.join(__dirname, './src/*/entity.ts')
+    path.join(__dirname, './src/*/entity.ts'),
+    path.join(__dirname, './src/*/entities/*.ts')
   ],
   migrations: [__dirname + "/migrations/*.ts"],
   subscribers: [],
